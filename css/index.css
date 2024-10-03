@@ -19,7 +19,6 @@
 body {
     background-color: var(--veryLightGray);
     color: var(--lightDarkBlue);
-    /* padding: 20px 50px; */
 }
 body.dark-mode {
     background-color: var(--veryDarkBlue);
@@ -36,7 +35,6 @@ nav{
 }
 nav.dark-mode {
     background-color: var(--veryDarkBlue);
-    /* background-color: var(--lightDarkBlue); */
 }
 nav h1{
     font-weight: 800;
@@ -68,12 +66,9 @@ main input{
     border: none;
     outline: none;
 }
-/* main input.dark-mode {
-    color: var(--veryDarkBlue);
-} */
+
 main input.dark-mode {
-    background-color: var(--veryDarkBlue); /* Set the input background color for dark mode */
-     /* Change text color for visibility */
+    background-color: var(--veryDarkBlue); 
 }
 
 main .main--input{
@@ -82,13 +77,11 @@ main .main--input{
     align-items: center;
     justify-content: center;
     height: 40px;
-    /* border: 1px solid gray; */
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
     gap: 10px;
     padding: 10px;
     border-radius: 5px;
     background-color: var(--white);
-    /* width: 30%; */
 }
 main .main--input.dark-mode {
     background-color: var(--veryDarkBlue);
@@ -100,7 +93,6 @@ main .main--select select{
     outline: none;
     border: none;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    /* gap: 2px; */
     background-color: white;
 }
 main .main--select select.dark-mode{
@@ -110,40 +102,13 @@ main .main--select select.dark-mode{
 .selected--country{
     cursor: pointer;
 }
-/* main .main--info{
-    max-width: 200px;
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-
-}
-
-.main--info img{
-    width: 100%;
-}
-
-.main--info .country--info{
-    padding: 10px;
-    width: 100%;
-}
-
-.main--info .country{
-    font-size: 20px;
-    font-weight: 800;
-}
-
-.main--info .title{
-    font-weight: 800;
-    font-size: 12px;
-} */
 
 
 main .main--info {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* Creates 4 equal-width columns */
-    gap: 20px; /* Adds space between the items */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; 
     margin-top: 20px;
-    /* min-height: 50px; */
 }
 
 .main--info .country {
@@ -159,9 +124,9 @@ main .main--info {
 
 .main--info img {
     width: 100%;
-    height: 150px; /* Set a fixed height for the images */
-    object-fit: cover; /* Ensures the image covers the area without distortion */
-    border-radius: 5px; /* Optional: adds rounded corners */
+    height: 150px;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .main--info .country-info {
@@ -171,26 +136,12 @@ main .main--info {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    height: 150px; /* Match this height to ensure the container aligns with the image */
+    height: 150px;
 }
 .main--info .country-info.dark-mode {
     background-color: var(--veryDarkBlue);
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    /* color: var(--white); Ensure text is readable */
 }
-
-/* .main--info .country-info.dark-mode {
-    background-color: var(--veryDarkBlue);
-} */
-
-/* .main--info .country-info.dark-mode {
-    background-color: var(--lightDarkBlue);
-    color: var(--white);
-} */
-/* .country-info.dark-mode {
-    background-color: var(--lightDarkBlue);
-    color: var(--white);
-} */
 
 @media (max-width: 768px) {
     nav{
@@ -209,8 +160,8 @@ main .main--info {
     }
     main .main--info {
         display: grid;
-        grid-template-columns: repeat(1, 1fr); /* Creates 4 equal-width columns */
-        gap: 20px; /* Adds space between the items */
+        grid-template-columns: repeat(1, 1fr); 
+        gap: 20px;
         margin-top: 20px;
     }
 }

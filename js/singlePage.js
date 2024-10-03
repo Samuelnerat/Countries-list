@@ -1,6 +1,5 @@
 const countryName = localStorage.getItem('countryName');
 
-// Step 2: Fetch the country data from the API
 if (countryName) {
     fetch(`https://restcountries.com/v3.1/name/${countryName}`)
         .then(response => {
@@ -10,7 +9,7 @@ if (countryName) {
             return response.json();
         })
         .then(data => {
-            displayCountryData(data); // Step 3: Display the country data
+            displayCountryData(data);
         })
         .catch(error => console.error('Error fetching country data:', error));
 } 
@@ -19,7 +18,7 @@ if (countryName) {
             const countryInfoDiv = document.getElementById('main--info');
             const country = data[0]; // Assuming you want the first country in the array
         
-            // Example of displaying country details
+            // Display country details
             countryInfoDiv.innerHTML = `
                 <div class='country--image'>
                     <img src="${country.flags.png}" alt="${country.name.common}" />
@@ -29,7 +28,7 @@ if (countryName) {
                     <h1>${country.name.common}</h1>
                     <div class="country--info">
                         <div>
-                            <p class="title">Native Name: <span class="name">${country.name.nativeName ? Object.values(country.name.nativeName).join(', ') : 'N/A'}</span></p>
+                            <p class="title">Native Name: <span class="name">${country.name.nativeName ? Object.values(country.name.nativeName).map(n => n.official).join(', ') : 'N/A'}</span></p>
                             <p class="title">Population: <span class="name">${country.population}</span></p>
                             <p class="title">Region: <span class="name">${country.region}</span></p>
                             <p class="title">Sub Region: <span class="name">${country.subregion ? country.subregion : 'N/A'}</span></p>
@@ -43,13 +42,44 @@ if (countryName) {
                     </div>
                     <div class="border--countries">
                         <p class="title">Border Countries:</p>
-                        <p class='border--list'>${country.borders ? country.borders.join(', ') : 'N/A'}</p>
+                        <div id="border-country-list"></div>
                     </div>
                 </div>
             `;
-
-            applyDarkMode()
+        
+            const borderCountryList = document.getElementById('border-country-list');
+            if (country.borders && country.borders.length > 0) {
+                country.borders.forEach(border => {
+                    const borderItem = document.createElement('p');
+                    borderItem.classList.add('border--item');
+                    borderItem.textContent = border;
+                    borderItem.style.cursor = 'pointer';
+                    borderItem.addEventListener('click', () => {
+                        fetchBorderCountry(border); 
+                    });
+                    borderCountryList.appendChild(borderItem);
+                });
+            } else {
+                borderCountryList.innerHTML = '<p>N/A</p>';
+            }
+        
+            applyDarkMode();
         }
+
+        function fetchBorderCountry(borderCountryCode) {
+            fetch(`https://restcountries.com/v3.1/alpha/${borderCountryCode}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayCountryData(data); 
+                })
+                .catch(error => console.error('Error fetching border country data:', error));
+        }
+
         
 
 
@@ -58,11 +88,11 @@ function applyDarkMode() {
 
     if (body.classList.contains('dark-mode')) {
         countryInfo.forEach(info => {
-            info.classList.add('dark-mode'); // Apply dark mode to all country info items
+            info.classList.add('dark-mode'); 
         });
     } else {
         countryInfo.forEach(info => {
-            info.classList.remove('dark-mode'); // Remove dark mode if not active
+            info.classList.remove('dark-mode'); 
         });
     }
 }
@@ -79,16 +109,14 @@ function toggleDarkMode() {
     body.classList.toggle('dark-mode');
     nav.classList.toggle('dark-mode');
 
-    // Re-select countryInfo elements to ensure you get the updated DOM
     const countryInfo = document.querySelectorAll('.country--info');
     countryInfo.forEach(info => {
-        info.classList.toggle('dark-mode'); // Ensure this affects all country info items
+        info.classList.toggle('dark-mode'); 
     });
 
     darkModeIcon.classList.toggle('fa-solid');
     darkModeIcon.classList.toggle('fa-regular');
 
-    // Save preference to localStorage
     if (body.classList.contains('dark-mode')) {
         localStorage.setItem('theme', 'dark');
     } else {
@@ -97,25 +125,22 @@ function toggleDarkMode() {
 }
 
 
-// Check for saved theme preference and apply it
 const savedTheme = localStorage.getItem('theme');
 if (savedTheme === 'dark') {
     body.classList.add('dark-mode');
     nav.classList.add('dark-mode');
 
     countryInfo.forEach(info => {
-        info.classList.add('dark-mode'); // Apply dark mode to all country info items
+        info.classList.add('dark-mode'); 
     });
     
     darkModeIcon.classList.add('fa-solid');
     darkModeIcon.classList.remove('fa-regular');
-    // darkModeText.textContent = 'Light Mode';
 }
 
-// Add event listener to the toggle button
 darkModeToggle.addEventListener('click', toggleDarkMode);
 
 
 document.getElementById("back-button").addEventListener("click", function() {
-    window.location.href = "../index.html"; // Redirect to index.html
+    window.location.href = "../index.html";
 });
