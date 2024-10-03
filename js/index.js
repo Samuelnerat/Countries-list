@@ -126,7 +126,7 @@ function addCountryClickListener() {
             const countryName = country.querySelector('.country').textContent;
             console.log(countryName);
             localStorage.setItem('countryName', countryName); 
-            window.location.href = './html/singlePage.html'; 
+            window.location.href = '../html/singlePage.html'; 
         });
     });
 }
