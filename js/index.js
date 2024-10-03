@@ -126,7 +126,9 @@ function addCountryClickListener() {
             const countryName = country.querySelector('.country').textContent;
             console.log(countryName);
             localStorage.setItem('countryName', countryName); 
-            window.location.href = "/Countries-list/pages/singlePage.html"; 
+            const repoName = window.location.pathname.split('/')[1]; // Gets the repo name
+window.location.href = `/${repoName}/pages/singlePage.html`;
+            // window.location.href = "/Countries-list/pages/singlePage.html"; 
         });
     });
 }
