@@ -112,6 +112,7 @@ nav p{
 .country--image img{
     width: 100%;
     height: 300px;
+    object-fit: contain;
 }
 
 @media (max-width: 768px) {
